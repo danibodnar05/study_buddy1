@@ -74,6 +74,15 @@ function updateCredit(amount) {
   renderCredit();
 }
 
+function refreshRevealAnimations() {
+  const items = document.querySelectorAll(".section.active .reveal");
+  items.forEach((item) => {
+    item.style.animation = "none";
+    void item.offsetWidth;
+    item.style.animation = "";
+  });
+}
+
 function showSection(sectionId, clickedButton = null) {
   document.querySelectorAll(".section").forEach((section) => {
     section.classList.remove("active");
@@ -94,6 +103,8 @@ function showSection(sectionId, clickedButton = null) {
     if (sectionId === "helpers") navButtons[2].classList.add("active");
     if (sectionId === "profile") navButtons[3].classList.add("active");
   }
+
+  refreshRevealAnimations();
 }
 
 function renderRequests() {
@@ -137,7 +148,7 @@ function renderHelpers() {
       <h3>${helper.name}</h3>
       <p class="helper-meta"><strong>Tantárgy:</strong> ${helper.subject}</p>
       <p class="helper-meta"><strong>Értékelés:</strong> ${helper.rating} / 5</p>
-      <button onclick="completeHelp('${helper.name}')">Segítettem neki (+2 kredit)</button>
+      <button class="primary-btn" onclick="completeHelp('${helper.name}')">Segítettem neki</button>
     `;
     helperList.appendChild(item);
   });
