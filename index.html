@@ -2,7 +2,10 @@
 <html lang="hu">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+  />
   <title>StudyBuddy</title>
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -11,53 +14,60 @@
     <div class="app">
       <header class="topbar">
         <div>
-          <p class="mini-text">Egyszerű sulis segítségkérés</p>
+          <p class="eyebrow">Tanulás egyszerűbben</p>
           <h1>StudyBuddy</h1>
         </div>
 
-        <div class="credit-box">
-          <span class="credit-label">Kredit</span>
-          <span class="credit-value" id="credit">10</span>
+        <div class="credit-pill">
+          <span class="credit-pill-label">Kredit</span>
+          <span class="credit-pill-value" id="credit">10</span>
         </div>
       </header>
 
       <main class="content">
         <section id="home" class="section active">
-          <div class="card hero">
-            <h2>Tanulj együtt másokkal</h2>
+          <div class="hero-card reveal">
+            <div class="hero-badge">Diákoknak</div>
+            <h2>Kérj segítséget, vagy segíts másoknak.</h2>
             <p>
-              Kérj segítséget, segíts másoknak, és gyűjts kreditet egyszerűen.
+              Egyszerű suliapp kreditrendszerrel, gyors segítségkéréssel és
+              átlátható felülettel.
             </p>
-            <div class="button-group">
-              <button onclick="showSection('request')">Segítséget kérek</button>
-              <button class="secondary-btn" onclick="showSection('helpers')">Segíteni szeretnék</button>
+
+            <div class="hero-actions">
+              <button class="primary-btn" onclick="showSection('request')">
+                Segítséget kérek
+              </button>
+              <button class="ghost-btn" onclick="showSection('helpers')">
+                Segíteni szeretnék
+              </button>
             </div>
           </div>
 
-          <div class="stats-grid">
+          <div class="stats-grid reveal delay-1">
             <div class="stat-card">
-              <span class="stat-title">Kredit</span>
+              <span class="stat-label">Kreditek</span>
               <strong id="homeCredit">10</strong>
             </div>
             <div class="stat-card">
-              <span class="stat-title">Kérések</span>
+              <span class="stat-label">Kérések</span>
               <strong id="homeRequestsCount">0</strong>
             </div>
             <div class="stat-card">
-              <span class="stat-title">Segítségek</span>
+              <span class="stat-label">Segítségek</span>
               <strong id="homeHelpsCount">0</strong>
             </div>
           </div>
 
-          <div class="card">
-            <div class="card-header">
+          <div class="card reveal delay-2">
+            <div class="card-head">
               <h3>Aktív segítségkérések</h3>
               <span class="badge" id="requestBadge">0</span>
             </div>
             <div id="requestList"></div>
           </div>
 
-          <div class="card">
+          <div class="card reveal delay-3">
             <h3>Top segítők</h3>
             <div class="top-helper-list">
               <div class="top-helper">
@@ -77,8 +87,12 @@
         </section>
 
         <section id="request" class="section">
-          <div class="card">
+          <div class="card reveal">
             <h2>Új segítségkérés</h2>
+            <p class="muted-text">
+              Egy kérés elküldése 2 kreditbe kerül.
+            </p>
+
             <form id="requestForm">
               <label for="subject">Tantárgy</label>
               <select id="subject" required>
@@ -91,10 +105,20 @@
               </select>
 
               <label for="topic">Téma</label>
-              <input type="text" id="topic" placeholder="Pl. másodfokú egyenlet" required />
+              <input
+                type="text"
+                id="topic"
+                placeholder="Pl. másodfokú egyenlet"
+                required
+              />
 
               <label for="description">Leírás</label>
-              <textarea id="description" rows="4" placeholder="Írd le röviden, miben kell segítség..." required></textarea>
+              <textarea
+                id="description"
+                rows="4"
+                placeholder="Írd le röviden, miben kell segítség..."
+                required
+              ></textarea>
 
               <label for="urgency">Sürgősség</label>
               <select id="urgency" required>
@@ -103,23 +127,25 @@
                 <option>Sürgős</option>
               </select>
 
-              <button type="submit">Segítséget kérek (-2 kredit)</button>
+              <button type="submit" class="primary-btn">
+                Segítséget kérek
+              </button>
             </form>
           </div>
         </section>
 
         <section id="helpers" class="section">
-          <div class="card">
+          <div class="card reveal">
             <h2>Segítők</h2>
             <p class="muted-text">
-              Ha segítettél valakinek, kapsz 2 kreditet, és értékelheted is.
+              Ha segítettél valakinek, kapsz 2 kreditet és értékelheted is.
             </p>
             <div id="helperList" class="helper-list"></div>
           </div>
         </section>
 
         <section id="profile" class="section">
-          <div class="card profile-card">
+          <div class="profile-hero reveal">
             <div class="avatar">G</div>
             <div>
               <h2>Gimis felhasználó</h2>
@@ -127,21 +153,45 @@
             </div>
           </div>
 
-          <div class="card">
+          <div class="card reveal delay-1">
             <h3>Statisztikák</h3>
-            <p><strong>Aktuális kredit:</strong> <span id="profileCredit">10</span></p>
-            <p><strong>Segítségkérések:</strong> <span id="requestsCount">0</span></p>
-            <p><strong>Segítségek:</strong> <span id="helpsCount">0</span></p>
+            <div class="profile-stats">
+              <div class="profile-row">
+                <span>Aktuális kredit</span>
+                <strong id="profileCredit">10</strong>
+              </div>
+              <div class="profile-row">
+                <span>Segítségkérések</span>
+                <strong id="requestsCount">0</strong>
+              </div>
+              <div class="profile-row">
+                <span>Segítségek</span>
+                <strong id="helpsCount">0</strong>
+              </div>
+            </div>
+
             <button class="danger-btn" onclick="resetApp()">Alaphelyzet</button>
           </div>
         </section>
       </main>
 
       <nav class="bottom-nav">
-        <button class="nav-btn active" onclick="showSection('home', this)">Kezdőlap</button>
-        <button class="nav-btn" onclick="showSection('request', this)">Kérés</button>
-        <button class="nav-btn" onclick="showSection('helpers', this)">Segítők</button>
-        <button class="nav-btn" onclick="showSection('profile', this)">Profil</button>
+        <button class="nav-btn active" onclick="showSection('home', this)">
+          <span class="nav-icon">⌂</span>
+          <span>Kezdőlap</span>
+        </button>
+        <button class="nav-btn" onclick="showSection('request', this)">
+          <span class="nav-icon">＋</span>
+          <span>Kérés</span>
+        </button>
+        <button class="nav-btn" onclick="showSection('helpers', this)">
+          <span class="nav-icon">★</span>
+          <span>Segítők</span>
+        </button>
+        <button class="nav-btn" onclick="showSection('profile', this)">
+          <span class="nav-icon">◉</span>
+          <span>Profil</span>
+        </button>
       </nav>
     </div>
   </div>
@@ -162,8 +212,8 @@
       </div>
 
       <div class="modal-actions">
-        <button class="secondary-btn" onclick="closeRatingModal()">Mégse</button>
-        <button onclick="saveRating()">Mentés</button>
+        <button class="ghost-btn" onclick="closeRatingModal()">Mégse</button>
+        <button class="primary-btn" onclick="saveRating()">Mentés</button>
       </div>
     </div>
   </div>
