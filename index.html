@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>StudyBuddy</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <h1>StudyBuddy</h1>
+      <div class="credit-box">
+        Kredited: <span id="credit">10</span>
+      </div>
+    </header>
+
+    <nav class="menu">
+      <button class="tab-btn active" onclick="showSection('home')">Főoldal</button>
+      <button class="tab-btn" onclick="showSection('request')">Segítséget kérek</button>
+      <button class="tab-btn" onclick="showSection('help')">Segítek</button>
+      <button class="tab-btn" onclick="showSection('profile')">Profil</button>
+    </nav>
+
+    <main>
+      <section id="home" class="section active">
+        <div class="card hero">
+          <h2>Tanuljatok együtt egyszerűbben</h2>
+          <p>
+            Kérj segítséget egy tantárgyból, vagy segíts másoknak és gyűjts kreditet.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Gyors műveletek</h3>
+          <div class="button-group">
+            <button onclick="showSection('request')">Segítséget kérek</button>
+            <button onclick="showSection('help')">Segíteni szeretnék</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Hogyan működik?</h3>
+          <ul>
+            <li>Segítségkérés: <strong>-2 kredit</strong></li>
+            <li>Segítségadás: <strong>+2 kredit</strong></li>
+            <li>A kredited automatikusan mentődik</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="request" class="section">
+        <div class="card">
+          <h2>Segítségkérés</h2>
+          <form id="requestForm">
+            <label for="subject">Tantárgy</label>
+            <select id="subject" required>
+              <option value="">Válassz tantárgyat</option>
+              <option>Matek</option>
+              <option>Magyar</option>
+              <option>Angol</option>
+              <option>Történelem</option>
+              <option>Informatika</option>
+            </select>
+
+            <label for="topic">Téma</label>
+            <input type="text" id="topic" placeholder="Pl. egyenletek" required />
+
+            <label for="description">Rövid leírás</label>
+            <textarea id="description" rows="4" placeholder="Írd le röviden, miben kell segítség..." required></textarea>
+
+            <label for="urgency">Sürgősség</label>
+            <select id="urgency">
+              <option>Nem sürgős</option>
+              <option>Ma jó lenne</option>
+              <option>Sürgős</option>
+            </select>
+
+            <button type="submit">Segítséget kérek (-2 kredit)</button>
+          </form>
+        </div>
+      </section>
+
+      <section id="help" class="section">
+        <div class="card">
+          <h2>Segítők listája</h2>
+          <div class="helper-list" id="helperList"></div>
+        </div>
+      </section>
+
+      <section id="profile" class="section">
+        <div class="card">
+          <h2>Profil</h2>
+          <p><strong>Név:</strong> Gimis felhasználó</p>
+          <p><strong>Aktuális kredit:</strong> <span id="profileCredit">10</span></p>
+          <p><strong>Segítségkérések száma:</strong> <span id="requestsCount">0</span></p>
+          <p><strong>Segítségek száma:</strong> <span id="helpsCount">0</span></p>
+          <button class="secondary-btn" onclick="resetApp()">Alaphelyzet</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
