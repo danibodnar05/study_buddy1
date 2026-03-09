@@ -21,6 +21,7 @@
       <div class="topbar-left">
         <div class="brand">
           <img src="logo.png" alt="StudyBuddy logó" class="brand-logo" />
+
           <div class="brand-text">
             <p class="eyebrow">Tanulás egyszerűbben</p>
             <h1>StudyBuddy</h1>
@@ -42,29 +43,18 @@
 
     <main class="content">
       <section id="home" class="section active">
-        <div class="hero-card reveal">
-          <div class="hero-top">
-            <span class="hero-tag">Diákoknak</span>
-            <span class="hero-mini">Gyors segítség</span>
-          </div>
-
+        <div class="card hero-card">
+          <span class="hero-tag">Diákoknak</span>
           <h2 id="welcomeText">Szia!</h2>
-          <p>
-            Kérj segítséget tantárgyakból, vagy segíts másoknak és gyűjts kreditet
-            egyszerűen, átláthatóan.
-          </p>
+          <p>Kérj segítséget tantárgyakból, vagy segíts másoknak és gyűjts kreditet.</p>
 
           <div class="hero-actions">
-            <button class="primary-btn" onclick="showSection('request')">
-              Segítséget kérek
-            </button>
-            <button class="secondary-btn" onclick="showSection('helpers')">
-              Segíteni szeretnék
-            </button>
+            <button class="primary-btn" onclick="showSection('request')">Segítséget kérek</button>
+            <button class="secondary-btn" onclick="showSection('helpers')">Segíteni szeretnék</button>
           </div>
         </div>
 
-        <div class="stats-grid reveal delay-1">
+        <div class="stats-grid">
           <div class="stat-card">
             <span class="stat-label">Kreditek</span>
             <strong id="homeCredit">10</strong>
@@ -79,7 +69,7 @@
           </div>
         </div>
 
-        <div class="card reveal delay-2">
+        <div class="card">
           <div class="card-head">
             <h3>Aktív segítségkérések</h3>
             <span class="badge" id="requestBadge">0</span>
@@ -89,7 +79,7 @@
       </section>
 
       <section id="request" class="section">
-        <div class="card reveal">
+        <div class="card">
           <h2>Új segítségkérés</h2>
           <p class="muted">Egy kérés elküldése 2 kreditbe kerül.</p>
 
@@ -118,7 +108,7 @@
       </section>
 
       <section id="helpers" class="section">
-        <div class="card reveal">
+        <div class="card">
           <h2>Segítők</h2>
           <p class="muted">Ha segítettél valakinek, kapsz 2 kreditet.</p>
           <div id="helperList"></div>
@@ -126,7 +116,7 @@
       </section>
 
       <section id="profile" class="section">
-        <div class="card reveal">
+        <div class="card">
           <div class="profile-head">
             <img src="logo.png" alt="StudyBuddy logó" class="profile-logo" />
             <div>
@@ -158,30 +148,19 @@
 
     <nav class="bottom-nav">
       <button class="nav-btn active" onclick="showSection('home', this)">
-        <svg viewBox="0 0 24 24" class="nav-svg" aria-hidden="true">
-          <path d="M4 11.5L12 5l8 6.5V19a1 1 0 0 1-1 1h-4.5v-5h-5v5H5a1 1 0 0 1-1-1z"/>
-        </svg>
+        <span class="nav-icon">⌂</span>
         <span>Kezdőlap</span>
       </button>
-
       <button class="nav-btn" onclick="showSection('request', this)">
-        <svg viewBox="0 0 24 24" class="nav-svg" aria-hidden="true">
-          <path d="M12 5v14M5 12h14"/>
-        </svg>
+        <span class="nav-icon">＋</span>
         <span>Kérés</span>
       </button>
-
       <button class="nav-btn" onclick="showSection('helpers', this)">
-        <svg viewBox="0 0 24 24" class="nav-svg" aria-hidden="true">
-          <path d="M12 17.3l-5.2 3 1.4-5.9L3.5 10l6.1-.5L12 4l2.4 5.5 6.1.5-4.7 4.4 1.4 5.9z"/>
-        </svg>
+        <span class="nav-icon">★</span>
         <span>Segítők</span>
       </button>
-
       <button class="nav-btn" onclick="showSection('profile', this)">
-        <svg viewBox="0 0 24 24" class="nav-svg" aria-hidden="true">
-          <path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4zm0 2c-4.4 0-8 2.2-8 5v1h16v-1c0-2.8-3.6-5-8-5z"/>
-        </svg>
+        <span class="nav-icon">◉</span>
         <span>Profil</span>
       </button>
     </nav>
@@ -194,6 +173,7 @@
       <div class="modal-logo-wrap">
         <img src="logo.png" alt="StudyBuddy logó" class="modal-logo" />
       </div>
+
       <h3>Üdv a StudyBuddy-ban</h3>
       <p class="muted">Add meg a neved.</p>
       <input type="text" id="nameInput" placeholder="Pl. Dani" maxlength="20" />
