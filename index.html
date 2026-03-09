@@ -1,223 +1,215 @@
 <!DOCTYPE html>
 <html lang="hu">
 <head>
-  <meta charset="UTF-8" />
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-  />
-  <title>StudyBuddy</title>
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<title>StudyBuddy</title>
+
+<link rel="stylesheet" href="style.css">
+
 </head>
+
 <body>
-  <div class="app-shell">
-    <div class="app">
-      <header class="topbar">
-        <div>
-          <p class="eyebrow">Tanulás egyszerűbben</p>
-          <h1>StudyBuddy</h1>
-        </div>
 
-        <div class="credit-pill">
-          <span class="credit-pill-label">Kredit</span>
-          <span class="credit-pill-value" id="credit">10</span>
-        </div>
-      </header>
+<div class="app-shell">
+<div class="app">
 
-      <main class="content">
-        <section id="home" class="section active">
-          <div class="hero-card reveal">
-            <div class="hero-badge">Diákoknak</div>
-            <h2>Kérj segítséget, vagy segíts másoknak.</h2>
-            <p>
-              Egyszerű suliapp kreditrendszerrel, gyors segítségkéréssel és
-              átlátható felülettel.
-            </p>
+<header class="topbar">
 
-            <div class="hero-actions">
-              <button class="primary-btn" onclick="showSection('request')">
-                Segítséget kérek
-              </button>
-              <button class="ghost-btn" onclick="showSection('helpers')">
-                Segíteni szeretnék
-              </button>
-            </div>
-          </div>
+<div>
+<p class="eyebrow">Tanulás egyszerűbben</p>
+<h1>StudyBuddy</h1>
+</div>
 
-          <div class="stats-grid reveal delay-1">
-            <div class="stat-card">
-              <span class="stat-label">Kreditek</span>
-              <strong id="homeCredit">10</strong>
-            </div>
-            <div class="stat-card">
-              <span class="stat-label">Kérések</span>
-              <strong id="homeRequestsCount">0</strong>
-            </div>
-            <div class="stat-card">
-              <span class="stat-label">Segítségek</span>
-              <strong id="homeHelpsCount">0</strong>
-            </div>
-          </div>
+<div class="credit-pill">
+<span class="credit-pill-label">Kredit</span>
+<span class="credit-pill-value" id="credit">10</span>
+</div>
 
-          <div class="card reveal delay-2">
-            <div class="card-head">
-              <h3>Aktív segítségkérések</h3>
-              <span class="badge" id="requestBadge">0</span>
-            </div>
-            <div id="requestList"></div>
-          </div>
+</header>
 
-          <div class="card reveal delay-3">
-            <h3>Top segítők</h3>
-            <div class="top-helper-list">
-              <div class="top-helper">
-                <span>🥇 Anna</span>
-                <span>4.9</span>
-              </div>
-              <div class="top-helper">
-                <span>🥈 Bence</span>
-                <span>4.8</span>
-              </div>
-              <div class="top-helper">
-                <span>🥉 Levi</span>
-                <span>4.7</span>
-              </div>
-            </div>
-          </div>
-        </section>
 
-        <section id="request" class="section">
-          <div class="card reveal">
-            <h2>Új segítségkérés</h2>
-            <p class="muted-text">
-              Egy kérés elküldése 2 kreditbe kerül.
-            </p>
+<main class="content">
 
-            <form id="requestForm">
-              <label for="subject">Tantárgy</label>
-              <select id="subject" required>
-                <option value="">Válassz tantárgyat</option>
-                <option>Matek</option>
-                <option>Magyar</option>
-                <option>Angol</option>
-                <option>Történelem</option>
-                <option>Informatika</option>
-              </select>
+<section id="home" class="section active">
 
-              <label for="topic">Téma</label>
-              <input
-                type="text"
-                id="topic"
-                placeholder="Pl. másodfokú egyenlet"
-                required
-              />
+<div class="hero-card">
 
-              <label for="description">Leírás</label>
-              <textarea
-                id="description"
-                rows="4"
-                placeholder="Írd le röviden, miben kell segítség..."
-                required
-              ></textarea>
+<h2 id="welcomeText">Szia!</h2>
 
-              <label for="urgency">Sürgősség</label>
-              <select id="urgency" required>
-                <option>Nem sürgős</option>
-                <option>Ma jó lenne</option>
-                <option>Sürgős</option>
-              </select>
+<p>Segíts másoknak vagy kérj segítséget.</p>
 
-              <button type="submit" class="primary-btn">
-                Segítséget kérek
-              </button>
-            </form>
-          </div>
-        </section>
+<div class="hero-actions">
 
-        <section id="helpers" class="section">
-          <div class="card reveal">
-            <h2>Segítők</h2>
-            <p class="muted-text">
-              Ha segítettél valakinek, kapsz 2 kreditet és értékelheted is.
-            </p>
-            <div id="helperList" class="helper-list"></div>
-          </div>
-        </section>
+<button class="primary-btn"
+onclick="showSection('request')">
+Segítséget kérek
+</button>
 
-        <section id="profile" class="section">
-          <div class="profile-hero reveal">
-            <div class="avatar">G</div>
-            <div>
-              <h2>Gimis felhasználó</h2>
-              <p class="muted-text">Tanuló profil</p>
-            </div>
-          </div>
+<button class="ghost-btn"
+onclick="showSection('helpers')">
+Segíteni szeretnék
+</button>
 
-          <div class="card reveal delay-1">
-            <h3>Statisztikák</h3>
-            <div class="profile-stats">
-              <div class="profile-row">
-                <span>Aktuális kredit</span>
-                <strong id="profileCredit">10</strong>
-              </div>
-              <div class="profile-row">
-                <span>Segítségkérések</span>
-                <strong id="requestsCount">0</strong>
-              </div>
-              <div class="profile-row">
-                <span>Segítségek</span>
-                <strong id="helpsCount">0</strong>
-              </div>
-            </div>
+</div>
 
-            <button class="danger-btn" onclick="resetApp()">Alaphelyzet</button>
-          </div>
-        </section>
-      </main>
+</div>
 
-      <nav class="bottom-nav">
-        <button class="nav-btn active" onclick="showSection('home', this)">
-          <span class="nav-icon">⌂</span>
-          <span>Kezdőlap</span>
-        </button>
-        <button class="nav-btn" onclick="showSection('request', this)">
-          <span class="nav-icon">＋</span>
-          <span>Kérés</span>
-        </button>
-        <button class="nav-btn" onclick="showSection('helpers', this)">
-          <span class="nav-icon">★</span>
-          <span>Segítők</span>
-        </button>
-        <button class="nav-btn" onclick="showSection('profile', this)">
-          <span class="nav-icon">◉</span>
-          <span>Profil</span>
-        </button>
-      </nav>
-    </div>
-  </div>
+</section>
 
-  <div id="toast" class="toast"></div>
 
-  <div id="ratingModal" class="modal hidden">
-    <div class="modal-box">
-      <h3>Értékeld a segítséget</h3>
-      <p class="muted-text" id="ratingHelperName">Segítő neve</p>
+<section id="request" class="section">
 
-      <div class="stars" id="stars">
-        <span onclick="setRating(1)">★</span>
-        <span onclick="setRating(2)">★</span>
-        <span onclick="setRating(3)">★</span>
-        <span onclick="setRating(4)">★</span>
-        <span onclick="setRating(5)">★</span>
-      </div>
+<div class="card">
 
-      <div class="modal-actions">
-        <button class="ghost-btn" onclick="closeRatingModal()">Mégse</button>
-        <button class="primary-btn" onclick="saveRating()">Mentés</button>
-      </div>
-    </div>
-  </div>
+<h2>Segítségkérés</h2>
 
-  <script src="script.js"></script>
+<form id="requestForm">
+
+<label>Tantárgy</label>
+
+<select id="subject">
+<option>Matek</option>
+<option>Magyar</option>
+<option>Angol</option>
+<option>Történelem</option>
+<option>Informatika</option>
+</select>
+
+<label>Téma</label>
+
+<input
+type="text"
+id="topic"
+placeholder="Pl. egyenlet"
+required
+>
+
+<label>Leírás</label>
+
+<textarea
+id="description"
+rows="4"
+required
+></textarea>
+
+<button class="primary-btn">
+Segítséget kérek
+</button>
+
+</form>
+
+</div>
+
+</section>
+
+
+<section id="helpers" class="section">
+
+<div class="card">
+
+<h2>Segítők</h2>
+
+<div id="helperList"></div>
+
+</div>
+
+</section>
+
+
+<section id="profile" class="section">
+
+<div class="card">
+
+<h2>Profil</h2>
+
+<p><strong>Név:</strong> <span id="profileName"></span></p>
+
+<p><strong>Kredit:</strong> <span id="profileCredit"></span></p>
+
+<button onclick="toggleTheme()" class="ghost-btn">
+Dark / Light mód
+</button>
+
+<button onclick="resetApp()" class="danger-btn">
+Alaphelyzet
+</button>
+
+</div>
+
+</section>
+
+</main>
+
+
+<nav class="bottom-nav">
+
+<button class="nav-btn active"
+onclick="showSection('home', this)">
+
+🏠
+<span>Kezdőlap</span>
+
+</button>
+
+
+<button class="nav-btn"
+onclick="showSection('request', this)">
+
+➕
+<span>Kérés</span>
+
+</button>
+
+
+<button class="nav-btn"
+onclick="showSection('helpers', this)">
+
+⭐
+<span>Segítők</span>
+
+</button>
+
+
+<button class="nav-btn"
+onclick="showSection('profile', this)">
+
+👤
+<span>Profil</span>
+
+</button>
+
+</nav>
+
+</div>
+</div>
+
+
+<div id="loginModal" class="modal hidden">
+
+<div class="modal-box">
+
+<h2>Üdv!</h2>
+
+<p>Add meg a neved</p>
+
+<input id="nameInput" placeholder="Neved">
+
+<button class="primary-btn" onclick="saveName()">
+Belépés
+</button>
+
+</div>
+
+</div>
+
+
+<div id="toast" class="toast"></div>
+
+<script src="script.js"></script>
+
 </body>
 </html>
