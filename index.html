@@ -12,23 +12,28 @@
 <body>
   <div class="app-shell">
     <div class="app">
-      <header class="topbar">
-        <div>
-          <p class="eyebrow">Tanulás egyszerűbben</p>
-          <h1>StudyBuddy</h1>
-        </div>
+     <header class="topbar">
+  <div class="topbar-left">
+    <p class="eyebrow">Tanulás egyszerűbben</p>
+    <h1>StudyBuddy</h1>
+  </div>
 
-        <div class="header-actions">
-          <button class="theme-toggle" onclick="toggleTheme()" aria-label="Téma váltása">
-            <span id="themeIcon">☾</span>
-          </button>
+  <div class="topbar-right">
+    <div class="credit-pill">
+      <span class="credit-pill-label">Kredit</span>
+      <span class="credit-pill-value" id="credit">10</span>
+    </div>
 
-          <div class="credit-pill">
-            <span class="credit-pill-label">Kredit</span>
-            <span class="credit-pill-value" id="credit">10</span>
-          </div>
-        </div>
-      </header>
+    <button
+      type="button"
+      class="theme-toggle"
+      onclick="toggleTheme()"
+      aria-label="Téma váltása"
+    >
+      <span id="themeIcon">☾</span>
+    </button>
+  </div>
+</header>
 
       <main class="content">
         <section id="home" class="section active">
