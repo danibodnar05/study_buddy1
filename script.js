@@ -215,6 +215,17 @@ function showSection(id, btn = null) {
     if (id === "helpers") navButtons[2].classList.add("active");
     if (id === "profile") navButtons[3].classList.add("active");
   }
+
+  refreshReveal();
+}
+
+function refreshReveal() {
+  const items = document.querySelectorAll(".section.active .reveal");
+  items.forEach((item) => {
+    item.style.animation = "none";
+    void item.offsetWidth;
+    item.style.animation = "";
+  });
 }
 
 function showToast(text) {
