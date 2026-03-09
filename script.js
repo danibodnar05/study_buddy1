@@ -1,280 +1,263 @@
+
 const helpers = [
-  { name: "Bence", subject: "Matek", rating: 4.8 },
-  { name: "Anna", subject: "Angol", rating: 4.9 },
-  { name: "Levi", subject: "Informatika", rating: 4.7 },
-  { name: "Nóri", subject: "Történelem", rating: 4.6 }
+{ name: "Bence", subject: "Matek" },
+{ name: "Anna", subject: "Angol" },
+{ name: "Levi", subject: "Informatika" }
 ];
 
-function initApp() {
-  if (localStorage.getItem("credit") === null) {
-    localStorage.setItem("credit", "10");
-  }
+function initApp(){
 
-  if (localStorage.getItem("requestsCount") === null) {
-    localStorage.setItem("requestsCount", "0");
-  }
-
-  if (localStorage.getItem("helpsCount") === null) {
-    localStorage.setItem("helpsCount", "0");
-  }
-
-  if (localStorage.getItem("requests") === null) {
-    localStorage.setItem("requests", JSON.stringify([]));
-  }
-
-  applyStoredTheme();
-  renderCredit();
-  renderProfile();
-  renderRequests();
-  renderHelpers();
-  checkName();
+if(localStorage.getItem("credit")==null){
+localStorage.setItem("credit","10")
 }
 
-function checkName() {
-  const savedName = localStorage.getItem("userName");
-
-  if (!savedName) {
-    document.getElementById("nameModal").classList.remove("hidden");
-    return;
-  }
-
-  updateNameUI(savedName);
+if(localStorage.getItem("requests")==null){
+localStorage.setItem("requests",JSON.stringify([]))
 }
 
-function saveName() {
-  const input = document.getElementById("nameInput");
-  const name = input.value.trim();
+applyStoredTheme()
 
-  if (!name) {
-    showToast("Írd be a neved.");
-    return;
-  }
+renderCredit()
+renderHelpers()
+renderRequests()
 
-  localStorage.setItem("userName", name);
-  document.getElementById("nameModal").classList.add("hidden");
-  updateNameUI(name);
-  showToast(`Szia ${name}!`);
+checkName()
+
 }
 
-function updateNameUI(name) {
-  document.getElementById("welcomeText").textContent = `Szia ${name}!`;
-  document.getElementById("profileName").textContent = name;
-  document.getElementById("avatarLetter").textContent = name.charAt(0).toUpperCase();
+function checkName(){
+
+let name=localStorage.getItem("userName")
+
+if(!name){
+
+document.getElementById("nameModal").classList.remove("hidden")
+return
 }
 
-function renderCredit() {
-  const credit = localStorage.getItem("credit");
-  document.getElementById("credit").textContent = credit;
-  document.getElementById("profileCredit").textContent = credit;
-  document.getElementById("homeCredit").textContent = credit;
+updateNameUI(name)
+
 }
 
-function renderProfile() {
-  const requestsCount = localStorage.getItem("requestsCount");
-  const helpsCount = localStorage.getItem("helpsCount");
+function saveName(){
 
-  document.getElementById("requestsCount").textContent = requestsCount;
-  document.getElementById("helpsCount").textContent = helpsCount;
-  document.getElementById("homeRequestsCount").textContent = requestsCount;
-  document.getElementById("homeHelpsCount").textContent = helpsCount;
+let name=document.getElementById("nameInput").value.trim()
+
+if(!name){
+showToast("Írd be a neved")
+return
 }
 
-function updateCredit(amount) {
-  let credit = parseInt(localStorage.getItem("credit"), 10);
-  credit += amount;
-  localStorage.setItem("credit", credit.toString());
-  renderCredit();
+localStorage.setItem("userName",name)
+
+document.getElementById("nameModal").classList.add("hidden")
+
+updateNameUI(name)
+
 }
 
-function getRequests() {
-  return JSON.parse(localStorage.getItem("requests")) || [];
+function updateNameUI(name){
+
+document.getElementById("welcomeText").textContent="Szia "+name+"!"
+
+document.getElementById("profileName").textContent=name
+
+document.getElementById("avatarLetter").textContent=name.charAt(0).toUpperCase()
+
 }
 
-function saveRequests(requests) {
-  localStorage.setItem("requests", JSON.stringify(requests));
+function renderCredit(){
+
+let credit=localStorage.getItem("credit")
+
+document.getElementById("credit").textContent=credit
+document.getElementById("homeCredit").textContent=credit
+document.getElementById("profileCredit").textContent=credit
+
 }
 
-function renderRequests() {
-  const requestList = document.getElementById("requestList");
-  const requestBadge = document.getElementById("requestBadge");
-  const requests = getRequests();
+function updateCredit(amount){
 
-  requestBadge.textContent = requests.length;
-  requestList.innerHTML = "";
+let credit=parseInt(localStorage.getItem("credit"))
 
-  if (requests.length === 0) {
-    requestList.innerHTML = `
-      <div class="empty-box">
-        Még nincs aktív segítségkérés.
-      </div>
-    `;
-    return;
-  }
+credit+=amount
 
-  requests.forEach((request) => {
-    const item = document.createElement("div");
-    item.className = "request-item";
-    item.innerHTML = `
-      <h4>${request.subject} - ${request.topic}</h4>
-      <p class="request-meta"><strong>Sürgősség:</strong> ${request.urgency}</p>
-      <p>${request.description}</p>
-      <button class="danger-btn full-width" onclick="deleteRequest(${request.id})">Törlés</button>
-    `;
-    requestList.appendChild(item);
-  });
+localStorage.setItem("credit",credit)
+
+renderCredit()
+
 }
 
-function deleteRequest(id) {
-  const filtered = getRequests().filter((request) => request.id !== id);
-  saveRequests(filtered);
-  renderRequests();
-  showToast("A kérés törölve lett.");
+function renderHelpers(){
+
+let list=document.getElementById("helperList")
+
+list.innerHTML=""
+
+helpers.forEach(helper=>{
+
+let div=document.createElement("div")
+
+div.className="helper-item"
+
+div.innerHTML=`
+
+<h3>${helper.name}</h3>
+<p>${helper.subject}</p>
+
+<button onclick="completeHelp('${helper.name}')">
+Segítettem
+</button>
+
+`
+
+list.appendChild(div)
+
+})
+
 }
 
-function renderHelpers() {
-  const helperList = document.getElementById("helperList");
-  helperList.innerHTML = "";
+function completeHelp(name){
 
-  helpers.forEach((helper) => {
-    const item = document.createElement("div");
-    item.className = "helper-item";
-    item.innerHTML = `
-      <h3>${helper.name}</h3>
-      <p class="helper-meta"><strong>Tantárgy:</strong> ${helper.subject}</p>
-      <p class="helper-meta"><strong>Értékelés:</strong> ${helper.rating} / 5</p>
-      <button class="primary-btn full-width" onclick="completeHelp('${helper.name}')">
-        Segítettem neki
-      </button>
-    `;
-    helperList.appendChild(item);
-  });
+updateCredit(2)
+
+showToast(name+" után +2 kredit")
+
 }
 
-function completeHelp(helperName) {
-  updateCredit(2);
+function renderRequests(){
 
-  let helpsCount = parseInt(localStorage.getItem("helpsCount"), 10);
-  helpsCount += 1;
-  localStorage.setItem("helpsCount", helpsCount.toString());
+let list=document.getElementById("requestList")
 
-  renderProfile();
-  showToast(`${helperName} után +2 kreditet kaptál.`);
+let requests=JSON.parse(localStorage.getItem("requests"))
+
+list.innerHTML=""
+
+requests.forEach(r=>{
+
+let div=document.createElement("div")
+
+div.className="request-item"
+
+div.innerHTML=`
+
+<h4>${r.subject}</h4>
+<p>${r.description}</p>
+
+`
+
+list.appendChild(div)
+
+})
+
 }
 
-document.getElementById("requestForm").addEventListener("submit", function (e) {
-  e.preventDefault();
+document.getElementById("requestForm")
+.addEventListener("submit",function(e){
 
-  const credit = parseInt(localStorage.getItem("credit"), 10);
+e.preventDefault()
 
-  if (credit < 2) {
-    showToast("Nincs elég kredited.");
-    return;
-  }
+let credit=parseInt(localStorage.getItem("credit"))
 
-  const subject = document.getElementById("subject").value;
-  const topic = document.getElementById("topic").value.trim();
-  const description = document.getElementById("description").value.trim();
-  const urgency = document.getElementById("urgency").value;
-
-  const newRequest = {
-    id: Date.now(),
-    subject,
-    topic,
-    description,
-    urgency
-  };
-
-  const requests = getRequests();
-  requests.unshift(newRequest);
-  saveRequests(requests);
-
-  updateCredit(-2);
-
-  let requestsCount = parseInt(localStorage.getItem("requestsCount"), 10);
-  requestsCount += 1;
-  localStorage.setItem("requestsCount", requestsCount.toString());
-
-  renderProfile();
-  renderRequests();
-  this.reset();
-
-  showSection("home");
-  showToast("A segítségkérés elmentve. -2 kredit");
-});
-
-function showSection(sectionId, clickedButton = null) {
-  document.querySelectorAll(".section").forEach((section) => {
-    section.classList.remove("active");
-  });
-
-  document.getElementById(sectionId).classList.add("active");
-
-  document.querySelectorAll(".nav-btn").forEach((btn) => {
-    btn.classList.remove("active");
-  });
-
-  if (clickedButton) {
-    clickedButton.classList.add("active");
-  } else {
-    const navButtons = document.querySelectorAll(".nav-btn");
-    if (sectionId === "home") navButtons[0].classList.add("active");
-    if (sectionId === "request") navButtons[1].classList.add("active");
-    if (sectionId === "helpers") navButtons[2].classList.add("active");
-    if (sectionId === "profile") navButtons[3].classList.add("active");
-  }
-
-  refreshRevealAnimations();
+if(credit<2){
+showToast("Nincs elég kredit")
+return
 }
 
-function refreshRevealAnimations() {
-  const items = document.querySelectorAll(".section.active .reveal");
-  items.forEach((item) => {
-    item.style.animation = "none";
-    void item.offsetWidth;
-    item.style.animation = "";
-  });
+let subject=document.getElementById("subject").value
+let description=document.getElementById("description").value
+
+let requests=JSON.parse(localStorage.getItem("requests"))
+
+requests.push({
+subject,
+description
+})
+
+localStorage.setItem("requests",JSON.stringify(requests))
+
+updateCredit(-2)
+
+renderRequests()
+
+showToast("Kérés elküldve")
+
+})
+
+function showSection(id,btn){
+
+document.querySelectorAll(".section")
+.forEach(s=>s.classList.remove("active"))
+
+document.getElementById(id).classList.add("active")
+
+document.querySelectorAll(".nav-btn")
+.forEach(b=>b.classList.remove("active"))
+
+if(btn)btn.classList.add("active")
+
 }
 
-function showToast(message) {
-  const toast = document.getElementById("toast");
-  toast.textContent = message;
-  toast.classList.add("show");
+function showToast(text){
 
-  clearTimeout(window.toastTimeout);
-  window.toastTimeout = setTimeout(() => {
-    toast.classList.remove("show");
-  }, 2200);
+let toast=document.getElementById("toast")
+
+toast.textContent=text
+
+toast.classList.add("show")
+
+setTimeout(()=>{
+
+toast.classList.remove("show")
+
+},2000)
+
 }
 
-function toggleTheme() {
-  const isLight = document.body.classList.toggle("light-mode");
-  localStorage.setItem("theme", isLight ? "light" : "dark");
-  updateThemeIcon();
+function toggleTheme(){
+
+document.body.classList.toggle("light-mode")
+
+let theme=document.body.classList.contains("light-mode")?"light":"dark"
+
+localStorage.setItem("theme",theme)
+
+updateThemeIcon()
+
 }
 
-function applyStoredTheme() {
-  const savedTheme = localStorage.getItem("theme");
-  if (savedTheme === "light") {
-    document.body.classList.add("light-mode");
-  }
-  updateThemeIcon();
+function applyStoredTheme(){
+
+let theme=localStorage.getItem("theme")
+
+if(theme==="light"){
+document.body.classList.add("light-mode")
 }
 
-function updateThemeIcon() {
-  const themeIcon = document.getElementById("themeIcon");
-  if (!themeIcon) return;
+updateThemeIcon()
 
-  themeIcon.textContent = document.body.classList.contains("light-mode") ? "☀" : "☾";
 }
 
-function resetApp() {
-  localStorage.removeItem("credit");
-  localStorage.removeItem("requestsCount");
-  localStorage.removeItem("helpsCount");
-  localStorage.removeItem("requests");
-  localStorage.removeItem("userName");
-  localStorage.removeItem("theme");
-  location.reload();
+function updateThemeIcon(){
+
+let icon=document.getElementById("themeIcon")
+
+if(!icon)return
+
+if(document.body.classList.contains("light-mode")){
+icon.textContent="☀"
+}else{
+icon.textContent="☾"
 }
 
-initApp();
+}
+
+function resetApp(){
+
+localStorage.clear()
+
+location.reload()
+
+}
+
+initApp()
